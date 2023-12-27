@@ -20,6 +20,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	# Find closest NPC in range to select for interaction
 	var closest_npc = null
 	var closest_npc_distance: float = 0
 	
@@ -31,12 +32,15 @@ func _process(delta: float) -> void:
 		if current_npc_distance > interaction_range:
 			continue
 		
-		if closest_npc == null or current_npc_distance < closest_npc_distance:
+		if !closest_npc or current_npc_distance < closest_npc_distance:
 			closest_npc = npc
 			closest_npc_distance = current_npc_distance
 	
-	if closest_npc != null:
+	if closest_npc:
 		closest_npc.is_selected(true)
+	
+	if Input.is_action_just_pressed("action") and closest_npc:
+		print(closest_npc.npc_name)
 
 
 func _physics_process(delta: float) -> void:
