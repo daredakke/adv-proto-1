@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NpcNames="*res://autoload/npc_names.gd"
+NpcData="*res://autoload/npc_data.gd"
 
 [display]
 

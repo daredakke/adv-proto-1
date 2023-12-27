@@ -11,3 +11,4 @@ var names: Dictionary = {
 	Roles.SHOPKEEPER: "Jacob",
 	Roles.CONSTRUCTION_WORKER: "Laurence",
 }
+

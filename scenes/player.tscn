@@ -4,10 +4,11 @@
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_itwuf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_753vy"]
-size = Vector2(64, 128)
+size = Vector2(45.9619, 44.5477)
 
 [node name="Player" type="CharacterBody2D"]
 floor_stop_on_slope = false
+floor_constant_speed = true
 floor_max_angle = 0.872665
 floor_snap_length = 25.0
 script = ExtResource("1_itwuf")
@@ -17,5 +18,11 @@ position = Vector2(0, -64)
 texture = ExtResource("1_8ootf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -32)
+rotation = 0.785398
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_753vy")
+
+[node name="InteractionOrigin" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -64)
