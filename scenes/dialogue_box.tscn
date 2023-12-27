@@ -1,0 +1,131 @@
+[gd_scene load_steps=6 format=3 uid="uid://6mpye5ee7iy4"]
+
+[ext_resource type="Script" path="res://scripts/dialogue_box.gd" id="1_b7n0e"]
+[ext_resource type="Texture2D" uid="uid://c56ckurfyy6sk" path="res://assets/portrait.png" id="1_tx4jw"]
+[ext_resource type="Texture2D" uid="uid://pg3ty0wh5che" path="res://assets/arrow-small.png" id="3_at43b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhpfw"]
+bg_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqwd8"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_b7n0e")
+
+[node name="AvatarMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(0, 530)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -530.0
+offset_right = 282.0
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+
+[node name="TextureRect" type="TextureRect" parent="AvatarMargin"]
+layout_mode = 2
+texture = ExtResource("1_tx4jw")
+stretch_mode = 4
+
+[node name="DialogueBoxMargin" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(1280, 240)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="DialogueBoxVBox" type="VBoxContainer" parent="DialogueBoxMargin"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SpeakerPanel" type="Panel" parent="DialogueBoxMargin/DialogueBoxVBox"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vhpfw")
+
+[node name="SpeakerLabel" type="Label" parent="DialogueBoxMargin/DialogueBoxVBox/SpeakerPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Speaker"
+horizontal_alignment = 1
+
+[node name="BodyPanel" type="Panel" parent="DialogueBoxMargin/DialogueBoxVBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kqwd8")
+
+[node name="BodyMargin" type="MarginContainer" parent="DialogueBoxMargin/DialogueBoxVBox/BodyPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+
+[node name="BodyLabel" type="RichTextLabel" parent="DialogueBoxMargin/DialogueBoxVBox/BodyPanel/BodyMargin"]
+layout_mode = 2
+theme_override_constants/line_separation = 8
+theme_override_font_sizes/normal_font_size = 38
+text = "Its goal is to be optimized for and tightly integrated with Godot Engine, allowing great flexibility for content creation "
+fit_content = true
+
+[node name="NextLineArrowMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 8
+
+[node name="NextLineArrow" type="TextureRect" parent="NextLineArrowMargin"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_at43b")
+stretch_mode = 4
