@@ -60,16 +60,3 @@ func _physics_process(delta: float) -> void:
 
 	apply_floor_snap()
 	move_and_slide()
-
-
-#func _on_interaction_area_entered(area: Area2D) -> void:
-	#for npc in get_tree().get_nodes_in_group("npc"):
-		#npc.is_selected(false)
-	#
-	#if area is Npc:
-		#area.is_selected(true)
-#
-#
-#func _on_interaction_area_exited(area: Area2D) -> void:
-	#for npc in get_tree().get_nodes_in_group("npc"):
-		#npc.is_selected(false)
