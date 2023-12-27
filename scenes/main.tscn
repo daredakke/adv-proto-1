@@ -10,14 +10,14 @@
 position = Vector2(-3, 21)
 
 [node name="Player" parent="." instance=ExtResource("2_jq5d0")]
-position = Vector2(861, 502)
+position = Vector2(884, 571)
 rotation = 0.00180958
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_q2i3t")]
 position_smoothing_speed = 6.0
 target = NodePath("../Player")
 offset_distance_x = 250.0
-speed_fast = 8.0
+speed_fast = 7.0
 speed_slow = 0.5
 position_reset_wait_time = 3.0
 

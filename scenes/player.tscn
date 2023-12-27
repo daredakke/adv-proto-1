@@ -7,14 +7,15 @@
 size = Vector2(64, 128)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(0, -64)
 floor_stop_on_slope = false
 floor_max_angle = 0.872665
 floor_snap_length = 25.0
 script = ExtResource("1_itwuf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
 texture = ExtResource("1_8ootf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -64)
 shape = SubResource("RectangleShape2D_753vy")
