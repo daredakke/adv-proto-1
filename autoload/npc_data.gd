@@ -2,6 +2,12 @@ extends Node
 
 const MC_NAME: String = "Shujinko"
 
+const PORTRAIT_NORMAL = preload("res://assets/portraits/portrait-normal.png")
+const PORTRAIT_BORED = preload("res://assets/portraits/portrait-bored.png")
+const PORTRAIT_CONFUSED = preload("res://assets/portraits/portrait-confused.png")
+const PORTRAIT_HAPPY = preload("res://assets/portraits/portrait-happy.png")
+const PORTRAIT_TROUBLED = preload("res://assets/portraits/portrait-troubled.png")
+
 enum ID {
 	NO_ROLE,
 	SHOPKEEPER,
@@ -25,6 +31,7 @@ var lines: Dictionary = {
 			"line": "There is something rather frightening about its tangled branches, and this estranges one from it."
 		},
 		{
+			"portrait": PORTRAIT_NORMAL,
 			"speaker": MC_NAME,
 			"line": "Is that so?"
 		},
@@ -32,6 +39,7 @@ var lines: Dictionary = {
 	
 	ID.CONSTRUCTION_WORKER: [
 		{
+			"portrait": PORTRAIT_NORMAL,
 			"speaker": MC_NAME,
 			"line": "What's going on?"
 		},
@@ -44,6 +52,7 @@ var lines: Dictionary = {
 			"line": "Though there is nothing very splendid or unusual about the tree, one always has the illusion that it is covered with snow"
 		},
 		{
+			"portrait": PORTRAIT_BORED,
 			"speaker": MC_NAME,
 			"line": "You guys talk about trees a lot, huh."
 		},

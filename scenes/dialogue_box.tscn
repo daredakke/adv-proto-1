@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://6mpye5ee7iy4"]
+[gd_scene load_steps=5 format=3 uid="uid://6mpye5ee7iy4"]
 
 [ext_resource type="Script" path="res://scripts/dialogue_box.gd" id="1_b7n0e"]
-[ext_resource type="Texture2D" uid="uid://c56ckurfyy6sk" path="res://assets/portrait.png" id="1_tx4jw"]
 [ext_resource type="Texture2D" uid="uid://pg3ty0wh5che" path="res://assets/arrow-small.png" id="3_at43b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vhpfw"]
@@ -25,7 +24,7 @@ script = ExtResource("1_b7n0e")
 unique_name_in_owner = true
 one_shot = true
 
-[node name="AvatarMargin" type="MarginContainer" parent="."]
+[node name="PortraitMargin" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(0, 530)
 layout_mode = 1
 anchors_preset = 2
@@ -38,10 +37,9 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 
-[node name="AvatarTexture" type="TextureRect" parent="AvatarMargin"]
+[node name="PortraitTexture" type="TextureRect" parent="PortraitMargin"]
 unique_name_in_owner = true
 layout_mode = 2
-texture = ExtResource("1_tx4jw")
 stretch_mode = 4
 
 [node name="DialogueBoxMargin" type="MarginContainer" parent="."]

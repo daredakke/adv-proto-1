@@ -4,7 +4,7 @@ extends Control
 signal dialogue_ended
 
 @onready var next_char_timer: Timer = %NextCharTimer
-@onready var avatar_texture: TextureRect = %AvatarTexture
+@onready var portrait_texture: TextureRect = %PortraitTexture
 @onready var speaker_label: Label = %SpeakerLabel
 @onready var body_label: RichTextLabel = %BodyLabel
 @onready var next_line_arrow: TextureRect = %NextLineArrow
@@ -44,6 +44,13 @@ func advance_line() -> void:
 		return
 	
 	speaker_label.text = lines[current_line_index]["speaker"]
+	
+	if lines[current_line_index].has("portrait"):
+		portrait_texture.texture = lines[current_line_index]["portrait"]
+		
+		show_portrait_texture()
+	else:
+		hide_portrait_texture()
 	
 	# Complete the line if text is in process of being displayed
 	if next_line.length() > 0:
@@ -111,7 +118,7 @@ func end_dialogue() -> void:
 func hide_all() -> void:
 	hide_self()
 	hide_next_line_arrow()
-	hide_avatar_texture()
+	hide_portrait_texture()
 
 
 func show_self() -> void:
@@ -130,9 +137,9 @@ func hide_next_line_arrow() -> void:
 	next_line_arrow.visible = false
 
 
-func show_avatar_texture() -> void:
-	avatar_texture.visible = true
+func show_portrait_texture() -> void:
+	portrait_texture.visible = true
 
 
-func hide_avatar_texture() -> void:
-	avatar_texture.visible = false
+func hide_portrait_texture() -> void:
+	portrait_texture.visible = false
