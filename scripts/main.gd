@@ -11,7 +11,6 @@ func _ready() -> void:
 
 
 func _on_player_talking(npc_id: int) -> void:
-	print_debug(npc_id)
 	dialogue_box.start_dialogue(npc_id)
 
 

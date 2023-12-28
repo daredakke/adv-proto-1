@@ -4,6 +4,7 @@ extends Control
 signal dialogue_ended
 
 @onready var next_char_timer: Timer = %NextCharTimer
+@onready var portrait_margin: MarginContainer = %PortraitMargin
 @onready var portrait_texture: TextureRect = %PortraitTexture
 @onready var speaker_label: Label = %SpeakerLabel
 @onready var body_label: RichTextLabel = %BodyLabel
@@ -12,6 +13,7 @@ signal dialogue_ended
 var npc_id: int
 var lines: Array
 var next_line: String = ""
+var stored_portrait = null
 var current_line_index: int = 0
 
 
@@ -34,6 +36,11 @@ func start_dialogue(npc_id: int) -> void:
 	lines = NpcData.lines[npc_id]
 	
 	show_self()
+	
+	# Prevent advancing twice if text speed is set to instant
+	if Input.is_action_just_pressed("action"):
+		return
+	
 	advance_line()
 
 
@@ -43,12 +50,20 @@ func advance_line() -> void:
 		
 		return
 	
-	speaker_label.text = lines[current_line_index]["speaker"]
+	var speaker: String = lines[current_line_index]["speaker"]
+	speaker_label.text = speaker
 	
 	if lines[current_line_index].has("portrait"):
 		portrait_texture.texture = lines[current_line_index]["portrait"]
 		
 		show_portrait_texture()
+		
+		if speaker == NpcData.MC_NAME:
+			portrait_margin.set_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+			portrait_texture.flip_h = false
+		else:
+			portrait_margin.set_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			portrait_texture.flip_h = true
 	else:
 		hide_portrait_texture()
 	

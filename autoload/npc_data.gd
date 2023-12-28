@@ -23,10 +23,12 @@ var names: Dictionary = {
 var lines: Dictionary = {
 	ID.SHOPKEEPER: [
 		{
+			"portrait": PORTRAIT_HAPPY,
 			"speaker": names[ID.SHOPKEEPER],
 			"line": "The camphor tends to grow by itself, avoiding clusters of other trees."
 		},
 		{
+			"portrait": PORTRAIT_HAPPY,
 			"speaker": names[ID.SHOPKEEPER],
 			"line": "There is something rather frightening about its tangled branches, and this estranges one from it."
 		},
@@ -49,12 +51,16 @@ var lines: Dictionary = {
 		},
 		{
 			"speaker": names[ID.CONSTRUCTION_WORKER],
-			"line": "Though there is nothing very splendid or unusual about the tree, one always has the illusion that it is covered with snow"
+			"line": "Though there is nothing very splendid or unusual about the tree, one always has the illusion that it is covered with snow."
 		},
 		{
 			"portrait": PORTRAIT_BORED,
 			"speaker": MC_NAME,
 			"line": "You guys talk about trees a lot, huh."
+		},
+		{
+			"speaker": names[ID.CONSTRUCTION_WORKER],
+			"line": "Talking to " + names[ID.SHOPKEEPER] + " made me appreciate them more."
 		},
 	]
 }
