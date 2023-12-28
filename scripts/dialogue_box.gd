@@ -55,9 +55,9 @@ func advance_line() -> void:
 	speaker_label.text = speaker
 	
 	if speaker == "":
-		speaker_panel.modulate = Color.hex(Globals.TRANSPARENT)
+		speaker_panel.modulate = Color.TRANSPARENT
 	else:
-		speaker_panel.modulate = Color.hex(0xffffffff)
+		speaker_panel.modulate = Color.WHITE
 	
 	if lines[current_line_index].has("portrait"):
 		portrait_texture.texture = lines[current_line_index]["portrait"]

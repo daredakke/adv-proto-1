@@ -20,13 +20,16 @@ config/icon="res://icon.svg"
 
 NpcData="*res://autoload/npc_data.gd"
 GameOptions="*res://autoload/game_options.gd"
-Globals="*res://autoload/globals.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=800
 window/stretch/mode="viewport"
+
+[editor]
+
+movie_writer/movie_file="C:/Users/CSC/Documents/MEGA/dev/godot/_recordings/output.avi"
 
 [input]
 
