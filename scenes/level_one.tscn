@@ -41,7 +41,7 @@ scale = Vector2(4.89019, 4.93533)
 texture = ExtResource("1_rf64o")
 metadata/_edit_lock_ = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="RainParticles" type="GPUParticles2D" parent="."]
 position = Vector2(654, -194)
 amount = 4000
 process_material = SubResource("ParticleProcessMaterial_8uexe")

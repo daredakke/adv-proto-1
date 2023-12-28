@@ -1,23 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://l5054ihjeoss"]
+[gd_scene load_steps=7 format=3 uid="uid://l5054ihjeoss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_andn3"]
 [ext_resource type="PackedScene" uid="uid://56wfyipni0kv" path="res://scenes/level_one.tscn" id="1_c3gp2"]
 [ext_resource type="PackedScene" uid="uid://bn5oipkd6sy8w" path="res://scenes/player.tscn" id="2_jq5d0"]
 [ext_resource type="PackedScene" uid="uid://6mpye5ee7iy4" path="res://scenes/dialogue_box.tscn" id="4_71n20"]
 [ext_resource type="PackedScene" uid="uid://cfwmi2p8simic" path="res://scenes/camera.tscn" id="4_q2i3t"]
+[ext_resource type="PackedScene" uid="uid://gcdj0afsgmib" path="res://scenes/pause_menu.tscn" id="6_47fxc"]
 
 [node name="Main" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_andn3")
 
-[node name="LevelOne" parent="." instance=ExtResource("1_c3gp2")]
+[node name="Level" type="Node2D" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+
+[node name="LevelOne" parent="Level" instance=ExtResource("1_c3gp2")]
 position = Vector2(-3, 21)
 
 [node name="Player" parent="." instance=ExtResource("2_jq5d0")]
 unique_name_in_owner = true
+process_mode = 1
 position = Vector2(884, 571)
 rotation = 0.00180958
 
 [node name="Camera" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_q2i3t")]
+process_mode = 1
 position = Vector2(884, 507)
 position_smoothing_speed = 6.0
 target = NodePath("../Player")
@@ -30,6 +38,12 @@ position_reset_wait_time = 3.0
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("4_71n20")]
 unique_name_in_owner = true
+process_mode = 1
 
+[node name="PauseMenu" parent="UI" instance=ExtResource("6_47fxc")]
+unique_name_in_owner = true
+process_mode = 3
+
+[connection signal="pause_game" from="." to="." method="_on_pause_game"]
 [connection signal="player_moving" from="Player" to="Camera" method="_on_player_moving"]
 [connection signal="player_stopped" from="Player" to="Camera" method="_on_player_stopped"]

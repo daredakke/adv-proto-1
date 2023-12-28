@@ -1,0 +1,112 @@
+[gd_scene load_steps=4 format=3 uid="uid://gcdj0afsgmib"]
+
+[ext_resource type="Theme" uid="uid://cf1ncyhy0wxpo" path="res://menu_theme.tres" id="1_50teg"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_l77wt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nusl2"]
+bg_color = Color(0.188235, 0.188235, 0.188235, 0.784314)
+
+[node name="PauseMenu" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l77wt")
+
+[node name="PauseMenuPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nusl2")
+
+[node name="InnerMargin" type="MarginContainer" parent="PauseMenuPanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -142.5
+offset_bottom = 142.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 16
+
+[node name="PauseMenuVBox" type="VBoxContainer" parent="PauseMenuPanel/InnerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="PausedLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "GAME PAUSED"
+horizontal_alignment = 1
+
+[node name="MusicGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="MusicLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_50teg")
+text = "MUSIC"
+
+[node name="MusicSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 10.0
+theme = ExtResource("1_50teg")
+value = 100.0
+
+[node name="MusicLevelLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_50teg")
+text = "100%"
+horizontal_alignment = 2
+
+[node name="SFXGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="SFXLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_50teg")
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 10.0
+theme = ExtResource("1_50teg")
+value = 100.0
+
+[node name="SFXLevelLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_50teg")
+text = "100%"
+horizontal_alignment = 2
+
+[node name="ReturnToGameButton" type="Button" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_50teg")
+text = "RETURN TO GAME"
+
+[connection signal="pressed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/ReturnToGameButton" to="." method="_on_return_to_game_button_pressed"]
