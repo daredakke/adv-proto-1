@@ -61,6 +61,7 @@ theme = ExtResource("1_50teg")
 text = "MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -69,6 +70,7 @@ theme = ExtResource("1_50teg")
 value = 100.0
 
 [node name="MusicLevelLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_50teg")
@@ -87,6 +89,7 @@ theme = ExtResource("1_50teg")
 text = "SFX"
 
 [node name="SFXSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -95,6 +98,7 @@ theme = ExtResource("1_50teg")
 value = 100.0
 
 [node name="SFXLevelLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_50teg")
@@ -109,4 +113,18 @@ mouse_default_cursor_shape = 2
 theme = ExtResource("1_50teg")
 text = "RETURN TO GAME"
 
+[node name="MusicVolumeChangeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[node name="SFXVolumeChangeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.05
+one_shot = true
+
+[connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="pressed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/ReturnToGameButton" to="." method="_on_return_to_game_button_pressed"]
+[connection signal="timeout" from="MusicVolumeChangeTimer" to="." method="_on_music_volume_change_timer_timeout"]
+[connection signal="timeout" from="SFXVolumeChangeTimer" to="." method="_on_sfx_volume_change_timer_timeout"]
