@@ -60,9 +60,11 @@ func advance_line() -> void:
 		
 		if speaker == NpcData.MC_NAME:
 			portrait_margin.set_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+			
 			portrait_texture.flip_h = false
 		else:
 			portrait_margin.set_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			
 			portrait_texture.flip_h = true
 	else:
 		hide_portrait_texture()

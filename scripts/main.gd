@@ -6,12 +6,12 @@ extends Node2D
 
 
 func _ready() -> void:
-	player.player_talking.connect(_on_player_talking)
+	player.player_interacting.connect(_on_player_interacting)
 	dialogue_box.dialogue_ended.connect(_on_dialogue_ended)
 
 
-func _on_player_talking(npc_id: int) -> void:
-	dialogue_box.start_dialogue(npc_id)
+func _on_player_interacting(npc: Area2D) -> void:
+	dialogue_box.start_dialogue(npc.npc_id)
 
 
 func _on_dialogue_ended() -> void:

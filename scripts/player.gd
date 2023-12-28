@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 signal player_moving(direction: float)
 signal player_stopped
-signal player_talking(role: int)
+signal player_interacting(npc: Area2D)
 
 const SPEED: float = 500
 const INTERACTION_ORIGIN_OFFSET: int = 50
@@ -16,7 +16,7 @@ const INTERACTION_ORIGIN_OFFSET: int = 50
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_has_control: bool = true
-var selected_npc_id = null
+var closest_npc: Variant = null
 
 
 func _ready() -> void:
@@ -24,19 +24,21 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if player_has_control:
-		var closest_npc = find_closest_npc()
-		
-		# Show visual indication that an NPC can be interacted with
-		if closest_npc:
-			closest_npc.is_selected(true)
-		
-		# Talk to an NPC
-		if Input.is_action_just_pressed("action") and closest_npc:
-			selected_npc_id = closest_npc.npc_id
-			
-			self.player_talking.emit(selected_npc_id)
-			remove_player_control()
+	if !player_has_control:
+		return
+	
+	# Talk to an NPC
+	if Input.is_action_just_pressed("action") and closest_npc:
+		self.player_interacting.emit(closest_npc)
+		remove_player_control()
+
+
+func _on_player_moving(direction: float) -> void:
+	closest_npc = find_closest_npc()
+	
+	# Show visual indication that an NPC can be interacted with
+	if closest_npc:
+		closest_npc.is_selected(true)
 
 
 func find_closest_npc() -> Variant:
@@ -60,8 +62,10 @@ func find_closest_npc() -> Variant:
 
 
 func _physics_process(delta: float) -> void:
-	if player_has_control:
-		player_movement(delta)
+	if !player_has_control:
+		return
+	
+	player_movement(delta)
 
 
 func player_movement(delta: float) -> void:
