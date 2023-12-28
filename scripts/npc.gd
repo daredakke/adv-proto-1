@@ -7,7 +7,6 @@ extends Area2D
 @export var npc_texture: Texture2D
 @export var npc_role: NpcData.Roles = NpcData.Roles.NO_ROLE
 
-var npc_name: String
 var times_spoken_to: int = 0
 
 
@@ -16,8 +15,6 @@ func _ready() -> void:
 	
 	if npc_texture:
 		npc_sprite.texture = npc_texture
-	
-	npc_name = NpcData.names[npc_role]
 
 
 func is_selected(state: bool) -> void:

@@ -20,6 +20,7 @@ const INTERACTION_ORIGIN_OFFSET: int = 50
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_state: State = State.EXPLORATION
+var selected_npc_role = null
 
 
 func _ready() -> void:
@@ -28,34 +29,53 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if player_state == State.EXPLORATION:
-		# Find closest NPC in range to select for interaction
-		var closest_npc = null
-		var closest_npc_distance: float = 0
-		
-		for npc in get_tree().get_nodes_in_group("npc"):
-			npc.is_selected(false)
-			
-			var current_npc_distance = interaction_origin.global_position.distance_to(npc.global_position)
-			
-			if current_npc_distance > interaction_range:
-				continue
-			
-			if !closest_npc or current_npc_distance < closest_npc_distance:
-				closest_npc = npc
-				closest_npc_distance = current_npc_distance
+		var closest_npc = find_closest_npc()
 		
 		# Show visual indication that an NPC can be interacted with
 		if closest_npc:
 			closest_npc.is_selected(true)
 		
 		if Input.is_action_just_pressed("action") and closest_npc:
-			print(closest_npc.npc_name)
+			selected_npc_role = closest_npc.npc_role
+			player_state = State.TALKING
 		
 	elif player_state == State.TALKING:
-		pass
+		talking()
+		
+		if Input.is_action_just_pressed("debug_end_dialogue"):
+			player_state = State.EXPLORATION
+
+
+func find_closest_npc() -> Variant:
+	# Find closest NPC in range to select for interaction
+	var closest_npc = null
+	var closest_npc_distance: float = 0
+	
+	for npc in get_tree().get_nodes_in_group("npc"):
+		npc.is_selected(false)
+		
+		var current_npc_distance = interaction_origin.global_position.distance_to(npc.global_position)
+		
+		if current_npc_distance > interaction_range:
+			continue
+		
+		if !closest_npc or current_npc_distance < closest_npc_distance:
+			closest_npc = npc
+			closest_npc_distance = current_npc_distance
+
+	return closest_npc
+
+
+func talking() -> void:
+	pass
 
 
 func _physics_process(delta: float) -> void:
+	if player_state == State.EXPLORATION:
+		player_movement(delta)
+
+
+func player_movement(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
