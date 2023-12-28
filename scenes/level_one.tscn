@@ -1,10 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://56wfyipni0kv"]
+[gd_scene load_steps=8 format=3 uid="uid://56wfyipni0kv"]
 
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="1_cf4xv"]
 [ext_resource type="Texture2D" uid="uid://d1bfcffdswdx4" path="res://assets/clouds-bg.png" id="1_rf64o"]
+[ext_resource type="Texture2D" uid="uid://blwrsn6vw7m6h" path="res://assets/raindrop.png" id="2_8yjvl"]
 [ext_resource type="PackedScene" uid="uid://dqg8vc6yhbkl4" path="res://scenes/npc.tscn" id="3_dbyq5"]
 [ext_resource type="Texture2D" uid="uid://cn7ofmq8ddfca" path="res://assets/entities/npc.png" id="4_go8k0"]
 [ext_resource type="Texture2D" uid="uid://cuavtyo5kuses" path="res://assets/entities/sign.png" id="5_wdf5u"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8uexe"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(2000, 1, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 1, 0)
+spread = 12.736
+initial_velocity_min = 424.53
+initial_velocity_max = 603.77
+gravity = Vector3(0, 150, 0)
+linear_accel_min = 3.77
+linear_accel_max = 9.43
+attractor_interaction_enabled = false
+scale_max = 1.5
 
 [node name="LevelOne" type="Node2D"]
 
@@ -13,6 +29,18 @@ position = Vector2(887, 424)
 scale = Vector2(4.89019, 4.93533)
 texture = ExtResource("1_rf64o")
 metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(654, -194)
+amount = 1200
+process_material = SubResource("ParticleProcessMaterial_8uexe")
+texture = ExtResource("2_8yjvl")
+lifetime = 1.8
+preprocess = 6.0
+fixed_fps = 60
+visibility_rect = Rect2(-1750, -100, 3500, 1500)
+local_coords = true
+trail_lifetime = 0.73
 
 [node name="WallGroup" type="Node2D" parent="."]
 

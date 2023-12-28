@@ -6,7 +6,6 @@
 position_smoothing_enabled = true
 script = ExtResource("1_4ejjl")
 offset_distance_x = 90.0
-speed_fast = 8.0
 
 [node name="PositionResetTimer" type="Timer" parent="."]
 unique_name_in_owner = true
