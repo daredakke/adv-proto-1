@@ -10,8 +10,9 @@ func _ready() -> void:
 	dialogue_box.dialogue_ended.connect(_on_dialogue_ended)
 
 
-func _on_player_interacting(npc: Area2D) -> void:
-	dialogue_box.start_dialogue(npc.npc_id)
+func _on_player_interacting(entity: Area2D) -> void:
+	if entity.is_in_group("npc"):
+		dialogue_box.start_dialogue(entity.npc_id)
 
 
 func _on_dialogue_ended() -> void:

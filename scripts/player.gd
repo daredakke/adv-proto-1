@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 signal player_moving(direction: float)
 signal player_stopped
-signal player_interacting(npc: Area2D)
+signal player_interacting(entity: Area2D)
 
 const SPEED: float = 500
 const INTERACTION_ORIGIN_OFFSET: int = 50
@@ -13,10 +13,9 @@ const INTERACTION_ORIGIN_OFFSET: int = 50
 
 @export var interaction_range: float = 125
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var player_has_control: bool = true
-var closest_npc: Variant = null
+var closest_entity: Variant = null
 
 
 func _ready() -> void:
@@ -28,37 +27,37 @@ func _process(delta: float) -> void:
 		return
 	
 	# Talk to an NPC
-	if Input.is_action_just_pressed("action") and closest_npc:
-		self.player_interacting.emit(closest_npc)
+	if Input.is_action_just_pressed("action") and closest_entity:
+		self.player_interacting.emit(closest_entity)
 		remove_player_control()
 
 
 func _on_player_moving(direction: float) -> void:
-	closest_npc = find_closest_npc()
+	closest_entity = find_closest_entity()
 	
 	# Show visual indication that an NPC can be interacted with
-	if closest_npc:
-		closest_npc.is_selected(true)
+	if closest_entity:
+		closest_entity.is_selected(true)
 
 
-func find_closest_npc() -> Variant:
+func find_closest_entity() -> Variant:
 	# Find closest NPC in range to select for interaction
-	var closest_npc = null
-	var closest_npc_distance: float = 0
+	var closest_entity = null
+	var closest_entity_distance: float
 	
-	for npc in get_tree().get_nodes_in_group("npc"):
-		npc.is_selected(false)
+	for entity in get_tree().get_nodes_in_group("entity"):
+		entity.is_selected(false)
 		
-		var current_npc_distance = interaction_origin.global_position.distance_to(npc.global_position)
+		var current_entity_distance = interaction_origin.global_position.distance_to(entity.global_position)
 		
-		if current_npc_distance > interaction_range:
+		if current_entity_distance > interaction_range:
 			continue
 		
-		if !closest_npc or current_npc_distance < closest_npc_distance:
-			closest_npc = npc
-			closest_npc_distance = current_npc_distance
+		if !closest_entity or current_entity_distance < closest_entity_distance:
+			closest_entity = entity
+			closest_entity_distance = current_entity_distance
 	
-	return closest_npc
+	return closest_entity
 
 
 func _physics_process(delta: float) -> void:

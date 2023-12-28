@@ -6,6 +6,7 @@ signal dialogue_ended
 @onready var next_char_timer: Timer = %NextCharTimer
 @onready var portrait_margin: MarginContainer = %PortraitMargin
 @onready var portrait_texture: TextureRect = %PortraitTexture
+@onready var speaker_panel: Panel = %SpeakerPanel
 @onready var speaker_label: Label = %SpeakerLabel
 @onready var body_label: RichTextLabel = %BodyLabel
 @onready var next_line_arrow: TextureRect = %NextLineArrow
@@ -52,6 +53,11 @@ func advance_line() -> void:
 	
 	var speaker: String = lines[current_line_index]["speaker"]
 	speaker_label.text = speaker
+	
+	if speaker == "":
+		speaker_panel.modulate = Color.hex(Globals.TRANSPARENT)
+	else:
+		speaker_panel.modulate = Color.hex(0xffffffff)
 	
 	if lines[current_line_index].has("portrait"):
 		portrait_texture.texture = lines[current_line_index]["portrait"]

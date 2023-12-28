@@ -12,8 +12,13 @@ const MC_TROUBLED = preload("res://assets/portraits/portrait-troubled.png")
 
 enum ID {
 	NO_ROLE,
+	
+	# PEOPLE
 	SHOPKEEPER,
-	CONSTRUCTION_WORKER
+	CONSTRUCTION_WORKER,
+	
+	# SIGNS
+	TEST_SIGN,
 }
 
 var names: Dictionary = {
@@ -25,12 +30,10 @@ var names: Dictionary = {
 var lines: Dictionary = {
 	ID.SHOPKEEPER: [
 		{
-			"portrait": MC_HAPPY,
 			"speaker": names[ID.SHOPKEEPER],
 			"line": "The camphor tends to grow by itself, avoiding clusters of other trees."
 		},
 		{
-			"portrait": MC_HAPPY,
 			"speaker": names[ID.SHOPKEEPER],
 			"line": "There is something rather frightening about its tangled branches, and this estranges one from it."
 		},
@@ -63,6 +66,22 @@ var lines: Dictionary = {
 		{
 			"speaker": names[ID.CONSTRUCTION_WORKER],
 			"line": "Talking to " + names[ID.SHOPKEEPER] + " made me appreciate them more."
+		},
+	],
+	
+	ID.TEST_SIGN: [
+		{
+			"speaker": "",
+			"line": "This sign is for testing dialogue with inanimate entities."
+		},
+		{
+			"speaker": "",
+			"line": "Signs are just nameless NPCs and are useful for representing inanimate objects."
+		},
+		{
+			"portrait": MC_HAPPY,
+			"speaker": MC_NAME,
+			"line": "Well ain't that neat."
 		},
 	]
 }

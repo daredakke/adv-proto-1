@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://56wfyipni0kv"]
+[gd_scene load_steps=6 format=3 uid="uid://56wfyipni0kv"]
 
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="1_cf4xv"]
 [ext_resource type="Texture2D" uid="uid://d1bfcffdswdx4" path="res://assets/clouds-bg.png" id="1_rf64o"]
 [ext_resource type="PackedScene" uid="uid://dqg8vc6yhbkl4" path="res://scenes/npc.tscn" id="3_dbyq5"]
+[ext_resource type="Texture2D" uid="uid://cn7ofmq8ddfca" path="res://assets/entities/npc.png" id="4_go8k0"]
+[ext_resource type="Texture2D" uid="uid://cuavtyo5kuses" path="res://assets/entities/sign.png" id="5_wdf5u"]
 
 [node name="LevelOne" type="Node2D"]
 
@@ -45,8 +47,15 @@ scale = Vector2(4.68, 3.16)
 
 [node name="ShopKeeper" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1094, 550)
+npc_texture = ExtResource("4_go8k0")
 npc_id = 1
 
 [node name="ConstructionWorker" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1197, 550)
+npc_texture = ExtResource("4_go8k0")
 npc_id = 2
+
+[node name="NPC" parent="NPCs" instance=ExtResource("3_dbyq5")]
+position = Vector2(707, 527)
+npc_texture = ExtResource("5_wdf5u")
+npc_id = 3

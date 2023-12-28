@@ -66,6 +66,7 @@ layout_mode = 2
 theme_override_constants/separation = 0
 
 [node name="SpeakerPanel" type="Panel" parent="DialogueBoxMargin/DialogueBoxVBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -87,6 +88,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
+text = "TEST"
 horizontal_alignment = 1
 
 [node name="BodyPanel" type="Panel" parent="DialogueBoxMargin/DialogueBoxVBox"]
