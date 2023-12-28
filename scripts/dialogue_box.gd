@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 func start_dialogue(npc_id: int) -> void:
 	lines = NpcData.lines[npc_id]
 	
-	show_self()
+	show()
 	
 	# Prevent advancing twice if text speed is set to instant
 	if Input.is_action_just_pressed("action"):
@@ -62,7 +62,7 @@ func advance_line() -> void:
 	if lines[current_line_index].has("portrait"):
 		portrait_texture.texture = lines[current_line_index]["portrait"]
 		
-		show_portrait_texture()
+		portrait_texture.show()
 		
 		if speaker == NpcData.MC_NAME:
 			portrait_margin.set_offsets_preset(Control.PRESET_BOTTOM_LEFT)
@@ -73,7 +73,7 @@ func advance_line() -> void:
 			
 			portrait_texture.flip_h = true
 	else:
-		hide_portrait_texture()
+		portrait_texture.hide()
 	
 	# Complete the line if text is in process of being displayed
 	if next_line.length() > 0:
@@ -90,14 +90,14 @@ func advance_line() -> void:
 	# Start displaying text char by char
 	if next_char_timer.is_stopped():
 		next_char_timer.start()
-		hide_next_line_arrow()
+		next_line_arrow.hide()
 
 
 func to_next_line() -> void:
 	current_line_index += 1
 	next_line = ""
 	
-	show_next_line_arrow()
+	next_line_arrow.show()
 
 
 func complete_line() -> void:
@@ -139,30 +139,6 @@ func end_dialogue() -> void:
 
 
 func hide_all() -> void:
-	hide_self()
-	hide_next_line_arrow()
-	hide_portrait_texture()
-
-
-func show_self() -> void:
-	self.visible = true
-
-
-func hide_self() -> void:
-	self.visible = false
-
-
-func show_next_line_arrow() -> void:
-	next_line_arrow.visible = true
-
-
-func hide_next_line_arrow() -> void:
-	next_line_arrow.visible = false
-
-
-func show_portrait_texture() -> void:
-	portrait_texture.visible = true
-
-
-func hide_portrait_texture() -> void:
-	portrait_texture.visible = false
+	hide()
+	next_line_arrow.hide()
+	portrait_texture.hide()
