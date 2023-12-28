@@ -3,13 +3,9 @@ extends CharacterBody2D
 
 signal player_moving(direction: float)
 signal player_stopped
+signal player_talking(role: int)
 
-enum State {
-	EXPLORATION,
-	TALKING
-}
-
-const SPEED: float = 500.0
+const SPEED: float = 500
 const INTERACTION_ORIGIN_OFFSET: int = 50
 
 # Origin point for NPC interaction is offset left or right based on player's facing
@@ -19,8 +15,8 @@ const INTERACTION_ORIGIN_OFFSET: int = 50
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
-var player_state: State = State.EXPLORATION
-var selected_npc_role = null
+var player_has_control: bool = true
+var selected_npc_id = null
 
 
 func _ready() -> void:
@@ -28,22 +24,19 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if player_state == State.EXPLORATION:
+	if player_has_control:
 		var closest_npc = find_closest_npc()
 		
 		# Show visual indication that an NPC can be interacted with
 		if closest_npc:
 			closest_npc.is_selected(true)
 		
+		# Talk to an NPC
 		if Input.is_action_just_pressed("action") and closest_npc:
-			selected_npc_role = closest_npc.npc_role
-			player_state = State.TALKING
-		
-	elif player_state == State.TALKING:
-		talking()
-		
-		if Input.is_action_just_pressed("debug_end_dialogue"):
-			player_state = State.EXPLORATION
+			selected_npc_id = closest_npc.npc_id
+			
+			self.player_talking.emit(selected_npc_id)
+			remove_player_control()
 
 
 func find_closest_npc() -> Variant:
@@ -62,22 +55,18 @@ func find_closest_npc() -> Variant:
 		if !closest_npc or current_npc_distance < closest_npc_distance:
 			closest_npc = npc
 			closest_npc_distance = current_npc_distance
-
+	
 	return closest_npc
 
 
-func talking() -> void:
-	pass
-
-
 func _physics_process(delta: float) -> void:
-	if player_state == State.EXPLORATION:
+	if player_has_control:
 		player_movement(delta)
 
 
 func player_movement(delta: float) -> void:
 	# Add the gravity.
-	if not is_on_floor():
+	if !is_on_floor():
 		velocity.y += gravity * delta
 
 	# Get the input direction and handle the movement/deceleration.
@@ -88,10 +77,20 @@ func player_movement(delta: float) -> void:
 		
 		if direction != 0:
 			self.player_moving.emit(direction)
+			
 			interaction_origin.position.x = INTERACTION_ORIGIN_OFFSET * direction
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
 		self.player_stopped.emit()
 
 	apply_floor_snap()
 	move_and_slide()
+
+
+func give_player_control() -> void:
+	player_has_control = true
+
+
+func remove_player_control() -> void:
+	player_has_control = false

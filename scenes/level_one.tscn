@@ -45,8 +45,8 @@ scale = Vector2(4.68, 3.16)
 
 [node name="ShopKeeper" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1094, 550)
-npc_role = 1
+npc_id = 1
 
 [node name="ConstructionWorker" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1197, 550)
-npc_role = 2
+npc_id = 2

@@ -5,9 +5,7 @@ extends Area2D
 @onready var selected_arrow: Sprite2D = $SelectedArrow
 
 @export var npc_texture: Texture2D
-@export var npc_role: NpcData.Roles = NpcData.Roles.NO_ROLE
-
-var times_spoken_to: int = 0
+@export var npc_id: NpcData.ID
 
 
 func _ready() -> void:

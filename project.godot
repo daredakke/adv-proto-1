@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 NpcData="*res://autoload/npc_data.gd"
+GameOptions="*res://autoload/game_options.gd"
 
 [display]
 

@@ -1,16 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://l5054ihjeoss"]
+[gd_scene load_steps=6 format=3 uid="uid://l5054ihjeoss"]
 
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_andn3"]
 [ext_resource type="PackedScene" uid="uid://56wfyipni0kv" path="res://scenes/level_one.tscn" id="1_c3gp2"]
 [ext_resource type="PackedScene" uid="uid://bn5oipkd6sy8w" path="res://scenes/player.tscn" id="2_jq5d0"]
 [ext_resource type="PackedScene" uid="uid://6mpye5ee7iy4" path="res://scenes/dialogue_box.tscn" id="4_71n20"]
 [ext_resource type="PackedScene" uid="uid://cfwmi2p8simic" path="res://scenes/camera.tscn" id="4_q2i3t"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_andn3")
 
 [node name="LevelOne" parent="." instance=ExtResource("1_c3gp2")]
 position = Vector2(-3, 21)
 
 [node name="Player" parent="." instance=ExtResource("2_jq5d0")]
+unique_name_in_owner = true
 position = Vector2(884, 571)
 rotation = 0.00180958
 
@@ -26,6 +29,7 @@ position_reset_wait_time = 3.0
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="DialogueBox" parent="UI" instance=ExtResource("4_71n20")]
+unique_name_in_owner = true
 
 [connection signal="player_moving" from="Player" to="Camera" method="_on_player_moving"]
 [connection signal="player_stopped" from="Player" to="Camera" method="_on_player_stopped"]
