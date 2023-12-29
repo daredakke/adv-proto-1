@@ -16,7 +16,8 @@ const SELECTED_ARROW_GAP: int = 24
 @export var is_grounded: bool = true
 @export var patrolling: bool = true
 @export_range(0, 1000) var speed: float = 200
-@export_range(0, 60) var pause_duration: float
+@export_range(0, 60, 0.05, "suffix:s") var pause_duration: float
+@export_range(1, 25, 1, "suffix:px") var tolerance: int
 
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_move: bool
@@ -51,10 +52,9 @@ func _physics_process(delta: float) -> void:
 		marker_index += 1
 		
 		if marker_index >= markers.size():
-			if patrolling:
-				# Start over
-				marker_index = 0
-			else:
+			marker_index = 0
+			
+			if !patrolling:
 				# Stop moving
 				movable = false
 				can_move = movable
@@ -103,11 +103,13 @@ func _on_wait_timer_timeout() -> void:
 func is_close_enough(position: Vector2, target: Vector2, grounded: bool) -> bool:
 	var result = false
 	
-	if abs(position.x - target.x) < 1:
+	if round(abs(position.x - target.x)) <= tolerance:
 		result = true
 	
-	if !grounded and result and abs(position.y - target.y) < 1:
-		return true
+	if !grounded and result and round(abs(position.y - target.y)) <= tolerance:
+		result = true
+	
+	print("x: ", round(abs(position.x - target.x)), " y: ", round(abs(position.y - target.y)))
 	
 	return result
 
