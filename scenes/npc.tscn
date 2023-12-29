@@ -8,6 +8,10 @@ size = Vector2(45.9619, 44.5477)
 
 [node name="NPC" type="CharacterBody2D" groups=["entity", "npc"]]
 collision_layer = 4
+floor_stop_on_slope = false
+floor_constant_speed = true
+floor_max_angle = 0.872665
+floor_snap_length = 25.0
 script = ExtResource("1_aajsn")
 
 [node name="NPCSprite" type="Sprite2D" parent="."]
@@ -29,3 +33,4 @@ one_shot = true
 [node name="Markers" type="Node2D" parent="."]
 
 [connection signal="texture_changed" from="NPCSprite" to="." method="_on_npc_texture_changed"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

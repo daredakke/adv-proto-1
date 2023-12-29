@@ -14,14 +14,14 @@ const SELECTED_ARROW_GAP: int = 24
 @export_category("NPC Movement")
 @export var movable: bool = false
 @export var is_grounded: bool = true
-@export var patrol: bool = true
+@export var patrolling: bool = true
 @export_range(0, 1000) var speed: float = 200
 @export_range(0, 60) var pause_duration: float
 
-var npc_gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_move: bool
 var markers: Array[Vector2]
-var next_marker_index: int = 0
+var marker_index: int = 0
 var direction_to_marker: Vector2
 
 
@@ -36,53 +36,80 @@ func _ready() -> void:
 			markers.append(marker.global_position)
 		
 		direction_to_marker = get_direction_to_next_coord()
-		print(npc_id, direction_to_marker)
 
 	if npc_texture:
 		npc_sprite.texture = npc_texture
 
 
 func _physics_process(delta: float) -> void:
-	if can_move:
-		# Add the gravity.
-		if is_grounded and !is_on_floor():
-			velocity.y += npc_gravity * delta
+	if !can_move or !wait_timer.is_stopped():
+		return
 		
-		velocity.x = direction_to_marker.x * speed
+	if is_close_enough(self.global_position, markers[marker_index], is_grounded):
+		direction_to_marker = Vector2.ZERO
 		
-		if !is_grounded:
-			velocity.y = direction_to_marker.y * speed
+		marker_index += 1
 		
+		if marker_index >= markers.size():
+			if patrolling:
+				# Start over
+				marker_index = 0
+			else:
+				# Stop moving
+				movable = false
+				can_move = movable
+		
+		if pause_duration > 0:
+			wait_timer.start()
+		else:
+			direction_to_marker = get_direction_to_next_coord()
+	
+	velocity.x = direction_to_marker.x * speed
+	
+	# Add the gravity.
+	if is_grounded:
 		apply_floor_snap()
-		move_and_slide()
 		
-		if is_close_enough(self.global_position, markers[next_marker_index]):
-			direction_to_marker = Vector2.ZERO
+		if !is_on_floor():
+			velocity.y += gravity * delta
+	else:
+		velocity.y = direction_to_marker.y * speed
+	
+	move_and_slide()
 
 
 func get_direction_to_next_coord() -> Vector2:
-	if markers.size() > 0 and next_marker_index < markers.size():
-		# Get vector pointing towards target position
-		var direction: Vector2 = markers[next_marker_index] - self.global_position
-		direction = direction.normalized()
-
-		# Grounded NPCs only need to move left and right
-		if is_grounded:
-			if direction.x != 0:
-				direction.x = clamp(direction.x * 10, -1, 1)
-			
-			direction.y = 0
-		
-		return direction
+	if markers.size() == 0 or marker_index >= markers.size():
+		return Vector2.ZERO
 	
-	return Vector2.ZERO
+	# Get vector pointing towards target position
+	var direction: Vector2 = markers[marker_index] - self.global_position
+	direction = direction.normalized()
+
+	# Grounded NPCs only need to move left and right
+	if is_grounded:
+		if direction.x != 0:
+			direction.x = clamp(direction.x * 10, -1, 1)
+		
+		direction.y = 0
+	
+	return direction
 
 
-func is_close_enough(position: Vector2, target: Vector2) -> bool:
-	if abs(position.x - target.x) < 1 and abs(position.y - target.y) < 1:
+func _on_wait_timer_timeout() -> void:
+	direction_to_marker = get_direction_to_next_coord()
+
+
+func is_close_enough(position: Vector2, target: Vector2, grounded: bool) -> bool:
+	var result = false
+	
+	if abs(position.x - target.x) < 1:
+		result = true
+	
+	if !grounded and result and abs(position.y - target.y) < 1:
 		return true
 	
-	return false
+	return result
 
 
 func npc_can_move(state: bool) -> void:

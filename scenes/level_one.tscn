@@ -96,14 +96,15 @@ position = Vector2(1197, 550)
 npc_texture = ExtResource("4_go8k0")
 npc_id = 2
 movable = true
-is_grounded = false
-speed = 250.0
+patrolling = false
+speed = 400.0
+pause_duration = 0.5
 
 [node name="Marker2D" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="0"]
-position = Vector2(-739, -217)
+position = Vector2(-1581, -156)
 
 [node name="Marker2D2" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="1"]
-position = Vector2(-276, -66)
+position = Vector2(94, -167)
 
 [node name="TestSign" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(707, 527)
