@@ -7,6 +7,7 @@
 size = Vector2(45.9619, 44.5477)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 floor_stop_on_slope = false
 floor_constant_speed = true
 floor_max_angle = 0.872665
@@ -25,5 +26,3 @@ shape = SubResource("RectangleShape2D_753vy")
 [node name="InteractionOrigin" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -64)
-
-[connection signal="player_moving" from="." to="." method="_on_player_moving"]

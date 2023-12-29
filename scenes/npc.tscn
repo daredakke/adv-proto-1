@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2flq5"]
 size = Vector2(45.9619, 44.5477)
 
-[node name="NPC" type="Area2D" groups=["entity", "npc"]]
+[node name="NPC" type="CharacterBody2D" groups=["entity", "npc"]]
+collision_layer = 4
 script = ExtResource("1_aajsn")
 
 [node name="NPCSprite" type="Sprite2D" parent="."]

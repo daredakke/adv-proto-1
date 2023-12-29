@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 signal player_moving(direction: float)
 signal player_stopped
-signal player_interacting(entity: Area2D)
+signal player_interacting(entity: Node2D)
 
 const SPEED: float = 500
 const INTERACTION_ORIGIN_OFFSET: int = 50
@@ -26,18 +26,16 @@ func _process(delta: float) -> void:
 	if !player_has_control:
 		return
 	
-	# Talk to an NPC
-	if Input.is_action_just_pressed("action") and closest_entity:
-		self.player_interacting.emit(closest_entity)
-		remove_player_control()
-
-
-func _on_player_moving(direction: float) -> void:
 	closest_entity = find_closest_entity()
 	
 	# Show visual indication that an NPC can be interacted with
 	if closest_entity:
 		closest_entity.is_selected(true)
+	
+	# Talk to an NPC
+	if Input.is_action_just_pressed("action") and closest_entity:
+		self.player_interacting.emit(closest_entity)
+		remove_player_control()
 
 
 func find_closest_entity() -> Variant:

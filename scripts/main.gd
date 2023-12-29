@@ -14,6 +14,7 @@ signal toggle_fullscreen(state: bool)
 
 var game_paused: bool = false
 var game_is_fullscreen: bool = false
+var last_entity_interacted_with: Variant = null
 
 
 func _ready() -> void:
@@ -37,8 +38,11 @@ func _process(delta: float) -> void:
 		self.toggle_fullscreen.emit(!game_is_fullscreen)
 
 
-func _on_player_interacting(entity: Area2D) -> void:
+func _on_player_interacting(entity: Node2D) -> void:
 	if entity.is_in_group("npc"):
+		last_entity_interacted_with = entity
+		
+		last_entity_interacted_with.npc_can_move(false)
 		dialogue_box.start_dialogue(entity.npc_id)
 
 
@@ -47,7 +51,10 @@ func _on_title_screen_start_game() -> void:
 
 
 func _on_dialogue_ended() -> void:
+	last_entity_interacted_with.npc_can_move(true)
 	player.give_player_control()
+	
+	last_entity_interacted_with = null
 
 
 func game_init() -> void:
