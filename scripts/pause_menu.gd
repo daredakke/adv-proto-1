@@ -2,6 +2,7 @@ class_name PauseMenu
 extends Control
 
 signal unpause_game
+signal set_text_speed(speed: GameOptions.TextSpeed)
 signal toggle_fullscreen(state: bool)
 signal quit_game
 
@@ -13,6 +14,7 @@ signal quit_game
 @onready var sfx_level_label: Label = %SFXLevelLabel
 @onready var sfx_slider: HSlider = %SFXSlider
 
+@onready var text_speed_option: OptionButton = %TextSpeedOption
 @onready var fullscreen_check_box: CheckBox = %FullscreenCheckBox
 
 
@@ -52,3 +54,8 @@ func toggle_fullscreen_check_box(state: bool) -> void:
 
 func _on_quit_game_button_pressed() -> void:
 	self.quit_game.emit()
+
+
+func _on_text_speed_option_item_selected(index: int) -> void:
+	var option = text_speed_option.get_item_text(index)
+	self.set_text_speed.emit(GameOptions.TextSpeed[option])

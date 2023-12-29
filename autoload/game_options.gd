@@ -1,8 +1,18 @@
 extends Node
 
-const TEXT_SPEED_INSTANT: float = 0
-const TEXT_SPEED_FAST: float = 0.01
-const TEXT_SPEED_MEDIUM: float = 0.02
-const TEXT_SPEED_SLOW: float = 0.03
+enum TextSpeed {
+	INSTANT,
+	FAST,
+	MEDIUM,
+	SLOW
+}
 
-var text_speed: float = TEXT_SPEED_FAST
+var text_speed: float
+
+
+func _ready() -> void:
+	set_text_speed(TextSpeed.FAST)
+
+
+func set_text_speed(speed: TextSpeed):
+	text_speed = speed * 0.01

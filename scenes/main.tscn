@@ -48,4 +48,5 @@ process_mode = 3
 [connection signal="toggle_fullscreen" from="." to="." method="_on_toggle_fullscreen"]
 [connection signal="player_moving" from="Player" to="Camera" method="_on_player_moving"]
 [connection signal="player_stopped" from="Player" to="Camera" method="_on_player_stopped"]
+[connection signal="set_text_speed" from="UI/PauseMenu" to="." method="_on_pause_menu_set_text_speed"]
 [connection signal="toggle_fullscreen" from="UI/PauseMenu" to="." method="_on_pause_menu_toggle_fullscreen"]

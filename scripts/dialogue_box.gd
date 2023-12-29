@@ -51,6 +51,8 @@ func advance_line() -> void:
 		
 		return
 	
+	next_char_timer.wait_time = GameOptions.text_speed
+	
 	var speaker: String = lines[current_line_index]["speaker"]
 	speaker_label.text = speaker
 	

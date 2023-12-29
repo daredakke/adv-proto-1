@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://gcdj0afsgmib"]
+[gd_scene load_steps=5 format=3 uid="uid://gcdj0afsgmib"]
 
 [ext_resource type="Theme" uid="uid://cf1ncyhy0wxpo" path="res://menu_theme.tres" id="1_50teg"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_l77wt"]
+[ext_resource type="FontFile" uid="uid://dmr7u18abb8wq" path="res://assets/fonts/Dosis-Bold.ttf" id="2_yynrm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nusl2"]
 bg_color = Color(0.188235, 0.188235, 0.188235, 0.784314)
@@ -45,9 +46,13 @@ theme_override_constants/separation = 32
 
 [node name="PausedLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yynrm")
 theme_override_font_sizes/font_size = 72
 text = "GAME PAUSED"
 horizontal_alignment = 1
+
+[node name="TopSeparator" type="HSeparator" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
 
 [node name="MusicGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 layout_mode = 2
@@ -58,6 +63,7 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_50teg")
+theme_override_fonts/font = ExtResource("2_yynrm")
 text = "MUSIC"
 
 [node name="MusicSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup"]
@@ -86,6 +92,7 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_50teg")
+theme_override_fonts/font = ExtResource("2_yynrm")
 text = "SFX"
 
 [node name="SFXSlider" type="HSlider" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup"]
@@ -105,10 +112,45 @@ theme = ExtResource("1_50teg")
 text = "100%"
 horizontal_alignment = 2
 
+[node name="TextSpeedGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="TextSpeedLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/TextSpeedGroup"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_50teg")
+theme_override_fonts/font = ExtResource("2_yynrm")
+text = "TEXT SPEED"
+
+[node name="TextSpeedOption" type="OptionButton" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/TextSpeedGroup"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_50teg")
+item_count = 4
+selected = 1
+popup/item_0/text = "INSTANT"
+popup/item_0/id = 0
+popup/item_1/text = "FAST"
+popup/item_1/id = 1
+popup/item_2/text = "MEDIUM"
+popup/item_2/id = 2
+popup/item_3/text = "SLOW"
+popup/item_3/id = 3
+
 [node name="FullscreenGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = 32
+
+[node name="FullscreenLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
+layout_mode = 2
+theme = ExtResource("1_50teg")
+theme_override_fonts/font = ExtResource("2_yynrm")
+text = "FULLSCREEN"
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
 unique_name_in_owner = true
@@ -117,10 +159,8 @@ size_flags_vertical = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_50teg")
 
-[node name="FullscreenLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
+[node name="BottomSeparator" type="HSeparator" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 layout_mode = 2
-theme = ExtResource("1_50teg")
-text = "FULLSCREEN"
 
 [node name="ReturnToGameButton" type="Button" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 custom_minimum_size = Vector2(500, 0)
@@ -150,6 +190,7 @@ one_shot = true
 
 [connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="item_selected" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/TextSpeedGroup/TextSpeedOption" to="." method="_on_text_speed_option_item_selected"]
 [connection signal="toggled" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
 [connection signal="pressed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/ReturnToGameButton" to="." method="_on_return_to_game_button_pressed"]
 [connection signal="pressed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

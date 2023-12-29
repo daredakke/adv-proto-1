@@ -11,6 +11,7 @@ signal toggle_fullscreen(state: bool)
 
 var game_paused: bool = false
 var game_is_fullscreen: bool = false
+var at_title_screen: bool = true
 
 
 func _ready() -> void:
@@ -65,3 +66,7 @@ func _on_toggle_fullscreen(state: bool) -> void:
 func _on_quit_game() -> void:
 	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 	get_tree().quit()
+
+
+func _on_pause_menu_set_text_speed(speed: GameOptions.TextSpeed) -> void:
+	GameOptions.set_text_speed(speed)
