@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scripts/npc.gd" id="1_aajsn"]
 [ext_resource type="Texture2D" uid="uid://7d0icc8v2fap" path="res://assets/arrow.png" id="3_0o0nq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_46hul"]
-size = Vector2(64, 128)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2flq5"]
+size = Vector2(45.9619, 44.5477)
 
 [node name="NPC" type="Area2D" groups=["entity", "npc"]]
 script = ExtResource("1_aajsn")
@@ -13,12 +13,18 @@ script = ExtResource("1_aajsn")
 position = Vector2(0, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -64)
-shape = SubResource("RectangleShape2D_46hul")
+position = Vector2(0, -32)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_2flq5")
 
 [node name="SelectedArrow" type="Sprite2D" parent="."]
 position = Vector2(0, -143)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_0o0nq")
+
+[node name="WaitTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Markers" type="Node2D" parent="."]
 
 [connection signal="texture_changed" from="NPCSprite" to="." method="_on_npc_texture_changed"]

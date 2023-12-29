@@ -42,7 +42,9 @@ texture = ExtResource("1_rf64o")
 metadata/_edit_lock_ = true
 
 [node name="RainParticles" type="GPUParticles2D" parent="."]
+visible = false
 position = Vector2(654, -194)
+emitting = false
 amount = 4000
 process_material = SubResource("ParticleProcessMaterial_8uexe")
 texture = ExtResource("2_8yjvl")
@@ -93,8 +95,17 @@ npc_id = 1
 position = Vector2(1197, 550)
 npc_texture = ExtResource("4_go8k0")
 npc_id = 2
+can_move = true
 
-[node name="NPC" parent="NPCs" instance=ExtResource("3_dbyq5")]
+[node name="Marker2D" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="0"]
+position = Vector2(-991, -86)
+
+[node name="Marker2D2" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="1"]
+position = Vector2(-276, -66)
+
+[node name="TestSign" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(707, 527)
 npc_texture = ExtResource("5_wdf5u")
 npc_id = 3
+
+[editable path="NPCs/ConstructionWorker"]

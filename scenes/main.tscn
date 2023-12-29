@@ -11,6 +11,7 @@
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_andn3")
+start_at_title_screen = false
 
 [node name="Level" type="Node2D" parent="."]
 unique_name_in_owner = true
