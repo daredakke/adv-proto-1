@@ -2,6 +2,7 @@ class_name PauseMenu
 extends Control
 
 signal unpause_game
+signal toggle_fullscreen(state: bool)
 
 @onready var music_volume_change_timer: Timer = %MusicVolumeChangeTimer
 @onready var music_level_label: Label = %MusicLevelLabel
@@ -36,3 +37,7 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 
 func _on_sfx_volume_change_timer_timeout() -> void:
 	sfx_level_label.text = str(sfx_slider.value) + "%"
+
+
+func _on_fullscreen_check_box_toggled(toggled_on: bool) -> void:
+	self.toggle_fullscreen.emit(toggled_on)

@@ -105,6 +105,22 @@ theme = ExtResource("1_50teg")
 text = "100%"
 horizontal_alignment = 2
 
+[node name="FullscreenGroup" type="HBoxContainer" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="FullscreenCheckBox" type="CheckBox" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_50teg")
+
+[node name="FullscreenLabel" type="Label" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
+layout_mode = 2
+theme = ExtResource("1_50teg")
+text = "FULLSCREEN"
+
 [node name="ReturnToGameButton" type="Button" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
@@ -125,6 +141,7 @@ one_shot = true
 
 [connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/MusicGroup/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/SFXGroup/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="toggled" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup/FullscreenCheckBox" to="." method="_on_fullscreen_check_box_toggled"]
 [connection signal="pressed" from="PauseMenuPanel/InnerMargin/PauseMenuVBox/ReturnToGameButton" to="." method="_on_return_to_game_button_pressed"]
 [connection signal="timeout" from="MusicVolumeChangeTimer" to="." method="_on_music_volume_change_timer_timeout"]
 [connection signal="timeout" from="SFXVolumeChangeTimer" to="." method="_on_sfx_volume_change_timer_timeout"]

@@ -1,5 +1,13 @@
-[gd_resource type="Theme" format=3 uid="uid://cf1ncyhy0wxpo"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cf1ncyhy0wxpo"]
+
+[ext_resource type="Texture2D" uid="uid://yo1fhmce83k4" path="res://assets/ui/checkbox-checked.png" id="1_0oeel"]
+[ext_resource type="Texture2D" uid="uid://dxgihhb2c7f73" path="res://assets/ui/checkbox-checked-disabled.png" id="2_bcilg"]
+[ext_resource type="Texture2D" uid="uid://b6esc005jrmy4" path="res://assets/ui/checkbox-unchecked.png" id="3_sa15v"]
 
 [resource]
 Button/font_sizes/font_size = 32
+CheckBox/icons/checked = ExtResource("1_0oeel")
+CheckBox/icons/checked_disabled = ExtResource("2_bcilg")
+CheckBox/icons/unchecked = ExtResource("3_sa15v")
+CheckBox/icons/unchecked_disabled = ExtResource("3_sa15v")
 Label/font_sizes/font_size = 32

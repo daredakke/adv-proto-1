@@ -40,3 +40,11 @@ func _on_pause_game() -> void:
 	else:
 		get_tree().paused = false
 		pause_menu.hide()
+
+
+func _on_pause_menu_toggle_fullscreen(state: bool) -> void:
+	if state:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		ProjectSettings.set_setting("display/window/size/borderless", false)
