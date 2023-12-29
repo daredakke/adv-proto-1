@@ -15,4 +15,5 @@ func _ready() -> void:
 
 
 func set_text_speed(speed: TextSpeed):
-	text_speed = speed * 0.01
+	if TextSpeed.find_key(speed):
+		text_speed = speed * 0.01
