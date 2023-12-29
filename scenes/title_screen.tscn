@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://diyev7g5qbgck"]
+[gd_scene load_steps=5 format=3 uid="uid://diyev7g5qbgck"]
 
 [ext_resource type="FontFile" uid="uid://dmr7u18abb8wq" path="res://assets/fonts/Dosis-Bold.ttf" id="1_mpvgf"]
 [ext_resource type="Theme" uid="uid://cf1ncyhy0wxpo" path="res://menu_theme.tres" id="1_uwrfc"]
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_v2o3d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ifwt"]
+bg_color = Color(0.160784, 0.305882, 0.529412, 1)
 
 [node name="TitleScreen" type="Control"]
 layout_mode = 3
@@ -10,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_v2o3d")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -18,8 +23,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ifwt")
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+[node name="TitleMargin" type="MarginContainer" parent="Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,83 +37,86 @@ theme_override_constants/margin_top = 64
 theme_override_constants/margin_right = 128
 theme_override_constants/margin_bottom = 64
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer"]
+[node name="TitleVBox" type="VBoxContainer" parent="Panel/TitleMargin"]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 32
 
-[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="GameTitleLabel" type="Label" parent="Panel/TitleMargin/TitleVBox"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_mpvgf")
 theme_override_font_sizes/font_size = 72
 text = "GAME TITLE"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="ControlsHBox" type="HBoxContainer" parent="Panel/TitleMargin/TitleVBox"]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 32
 
-[node name="LeftVBox" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="LeftVBox" type="VBoxContainer" parent="Panel/TitleMargin/TitleVBox/ControlsHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MovementLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/LeftVBox"]
+[node name="MovementLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/LeftVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 theme_override_fonts/font = ExtResource("1_mpvgf")
 text = "MOVEMENT"
 horizontal_alignment = 2
 
-[node name="InteractLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/LeftVBox"]
+[node name="InteractLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/LeftVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 theme_override_fonts/font = ExtResource("1_mpvgf")
 text = "INTERACT"
 horizontal_alignment = 2
 
-[node name="PauseLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/LeftVBox"]
+[node name="PauseLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/LeftVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 theme_override_fonts/font = ExtResource("1_mpvgf")
 text = "PAUSE / SETTINGS"
 horizontal_alignment = 2
 
-[node name="FullscreenLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/LeftVBox"]
+[node name="FullscreenLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/LeftVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 theme_override_fonts/font = ExtResource("1_mpvgf")
 text = "FULLSCREEN"
 horizontal_alignment = 2
 
-[node name="RightVBox" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RightVBox" type="VBoxContainer" parent="Panel/TitleMargin/TitleVBox/ControlsHBox"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MovementKeyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/RightVBox"]
+[node name="MovementKeyLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/RightVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 text = "ARROW KEYS"
 
-[node name="InteractKeyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/RightVBox"]
+[node name="InteractKeyLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/RightVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 text = "Z"
 
-[node name="PauseKeyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/RightVBox"]
+[node name="PauseKeyLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/RightVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 text = "ESCAPE"
 
-[node name="FullscreenKeyLabel" type="Label" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/RightVBox"]
+[node name="FullscreenKeyLabel" type="Label" parent="Panel/TitleMargin/TitleVBox/ControlsHBox/RightVBox"]
 layout_mode = 2
 theme = ExtResource("1_uwrfc")
 text = "ALT + ENTER"
 
-[node name="Button" type="Button" parent="Panel/MarginContainer/VBoxContainer"]
+[node name="StartGameButton" type="Button" parent="Panel/TitleMargin/TitleVBox"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2
 theme = ExtResource("1_uwrfc")
 text = "START GAME"
+
+[connection signal="pressed" from="Panel/TitleMargin/TitleVBox/StartGameButton" to="." method="_on_start_game_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://l5054ihjeoss"]
+[gd_scene load_steps=8 format=3 uid="uid://l5054ihjeoss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_andn3"]
 [ext_resource type="PackedScene" uid="uid://56wfyipni0kv" path="res://scenes/level_one.tscn" id="1_c3gp2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://6mpye5ee7iy4" path="res://scenes/dialogue_box.tscn" id="4_71n20"]
 [ext_resource type="PackedScene" uid="uid://cfwmi2p8simic" path="res://scenes/camera.tscn" id="4_q2i3t"]
 [ext_resource type="PackedScene" uid="uid://gcdj0afsgmib" path="res://scenes/pause_menu.tscn" id="6_47fxc"]
+[ext_resource type="PackedScene" uid="uid://diyev7g5qbgck" path="res://scenes/title_screen.tscn" id="7_dbr7l"]
 
 [node name="Main" type="Node2D"]
 process_mode = 3
@@ -44,9 +45,13 @@ process_mode = 1
 unique_name_in_owner = true
 process_mode = 3
 
+[node name="TitleScreen" parent="UI" instance=ExtResource("7_dbr7l")]
+unique_name_in_owner = true
+
 [connection signal="pause_game" from="." to="." method="_on_pause_game"]
 [connection signal="toggle_fullscreen" from="." to="." method="_on_toggle_fullscreen"]
 [connection signal="player_moving" from="Player" to="Camera" method="_on_player_moving"]
 [connection signal="player_stopped" from="Player" to="Camera" method="_on_player_stopped"]
 [connection signal="set_text_speed" from="UI/PauseMenu" to="." method="_on_pause_menu_set_text_speed"]
 [connection signal="toggle_fullscreen" from="UI/PauseMenu" to="." method="_on_pause_menu_toggle_fullscreen"]
+[connection signal="start_game" from="UI/TitleScreen" to="." method="_on_title_screen_start_game"]
