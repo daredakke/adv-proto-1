@@ -28,18 +28,24 @@ var direction_to_marker: Vector2
 
 func _ready() -> void:
 	is_selected(false)
+
+	if npc_texture:
+		npc_sprite.texture = npc_texture
 	
 	wait_timer.wait_time = pause_duration
 	can_move = movable
 	
-	if can_move and marker_nodes.get_children():
+	if can_move:
+		# NPC marked as movable but has no markers? Make it static
+		if !marker_nodes.get_children():
+			make_npc_static()
+			
+			return
+		
 		for marker in marker_nodes.get_children():
 			markers.append(marker.global_position)
 		
 		direction_to_marker = get_direction_to_next_coord()
-
-	if npc_texture:
-		npc_sprite.texture = npc_texture
 
 
 func _physics_process(delta: float) -> void:
@@ -55,9 +61,7 @@ func _physics_process(delta: float) -> void:
 			marker_index = 0
 			
 			if !patrolling:
-				# Stop moving
-				movable = false
-				can_move = movable
+				make_npc_static()
 		
 		if pause_duration > 0:
 			wait_timer.start()
@@ -96,6 +100,11 @@ func get_direction_to_next_coord() -> Vector2:
 	return direction
 
 
+func make_npc_static() -> void:
+	movable = false
+	can_move = movable
+
+
 func _on_wait_timer_timeout() -> void:
 	direction_to_marker = get_direction_to_next_coord()
 
@@ -108,8 +117,6 @@ func is_close_enough(position: Vector2, target: Vector2, grounded: bool) -> bool
 	
 	if !grounded and result and round(abs(position.y - target.y)) <= tolerance:
 		result = true
-	
-	print("x: ", round(abs(position.x - target.x)), " y: ", round(abs(position.y - target.y)))
 	
 	return result
 

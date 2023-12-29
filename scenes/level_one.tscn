@@ -86,10 +86,16 @@ scale = Vector2(4.68, 3.16)
 
 [node name="NPCs" type="Node2D" parent="."]
 
+[node name="TestSign" parent="NPCs" instance=ExtResource("3_dbyq5")]
+position = Vector2(707, 527)
+npc_texture = ExtResource("5_wdf5u")
+npc_id = 3
+
 [node name="ShopKeeper" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1094, 550)
 npc_texture = ExtResource("4_go8k0")
 npc_id = 1
+movable = true
 
 [node name="ConstructionWorker" parent="NPCs" instance=ExtResource("3_dbyq5")]
 position = Vector2(1197, 550)
@@ -101,14 +107,9 @@ pause_duration = 0.75
 tolerance = 3
 
 [node name="Marker2D" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="0"]
-position = Vector2(-1020, 163)
+position = Vector2(-946, -179)
 
 [node name="Marker2D2" type="Marker2D" parent="NPCs/ConstructionWorker/Markers" index="1"]
 position = Vector2(94, -167)
-
-[node name="TestSign" parent="NPCs" instance=ExtResource("3_dbyq5")]
-position = Vector2(707, 527)
-npc_texture = ExtResource("5_wdf5u")
-npc_id = 3
 
 [editable path="NPCs/ConstructionWorker"]
