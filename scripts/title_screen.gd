@@ -5,7 +5,7 @@ signal start_game
 
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("action"):
+	if Input.is_action_just_pressed("action") and !Input.is_action_just_pressed("toggle_fullscreen"):
 		self.start_game.emit()
 
 
