@@ -3,6 +3,7 @@ extends Control
 
 signal unpause_game
 signal toggle_fullscreen(state: bool)
+signal quit_game
 
 @onready var music_volume_change_timer: Timer = %MusicVolumeChangeTimer
 @onready var music_level_label: Label = %MusicLevelLabel
@@ -47,3 +48,7 @@ func _on_fullscreen_check_box_toggled(toggled_on: bool) -> void:
 
 func toggle_fullscreen_check_box(state: bool) -> void:
 	fullscreen_check_box.button_pressed = state
+
+
+func _on_quit_game_button_pressed() -> void:
+	self.quit_game.emit()

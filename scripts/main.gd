@@ -17,6 +17,7 @@ func _ready() -> void:
 	player.player_interacting.connect(_on_player_interacting)
 	dialogue_box.dialogue_ended.connect(_on_dialogue_ended)
 	pause_menu.unpause_game.connect(_on_pause_game)
+	pause_menu.quit_game.connect(_on_quit_game)
 
 
 func _process(delta: float) -> void:
@@ -59,3 +60,8 @@ func _on_pause_menu_toggle_fullscreen(state: bool) -> void:
 
 func _on_toggle_fullscreen(state: bool) -> void:
 	pause_menu.toggle_fullscreen_check_box(state)
+
+
+func _on_quit_game() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
+	get_tree().quit()
