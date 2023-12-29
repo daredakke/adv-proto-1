@@ -12,6 +12,8 @@ signal toggle_fullscreen(state: bool)
 @onready var sfx_level_label: Label = %SFXLevelLabel
 @onready var sfx_slider: HSlider = %SFXSlider
 
+@onready var fullscreen_check_box: CheckBox = %FullscreenCheckBox
+
 
 func _ready() -> void:
 	self.hide()
@@ -41,3 +43,7 @@ func _on_sfx_volume_change_timer_timeout() -> void:
 
 func _on_fullscreen_check_box_toggled(toggled_on: bool) -> void:
 	self.toggle_fullscreen.emit(toggled_on)
+
+
+func toggle_fullscreen_check_box(state: bool) -> void:
+	fullscreen_check_box.button_pressed = state

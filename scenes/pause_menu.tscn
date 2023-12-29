@@ -111,6 +111,7 @@ size_flags_horizontal = 4
 theme_override_constants/separation = 32
 
 [node name="FullscreenCheckBox" type="CheckBox" parent="PauseMenuPanel/InnerMargin/PauseMenuVBox/FullscreenGroup"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 mouse_default_cursor_shape = 2

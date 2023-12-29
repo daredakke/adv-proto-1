@@ -2,6 +2,7 @@ class_name Main
 extends Node2D
 
 signal pause_game
+signal toggle_fullscreen(state: bool)
 
 @onready var level: Node2D = %Level
 @onready var player: Player = %Player
@@ -9,6 +10,7 @@ signal pause_game
 @onready var pause_menu: Control = %PauseMenu
 
 var game_paused: bool = false
+var game_is_fullscreen: bool = false
 
 
 func _ready() -> void:
@@ -20,6 +22,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("pause"):
 		self.pause_game.emit()
+	
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		self.toggle_fullscreen.emit(!game_is_fullscreen)
 
 
 func _on_player_interacting(entity: Area2D) -> void:
@@ -43,8 +48,14 @@ func _on_pause_game() -> void:
 
 
 func _on_pause_menu_toggle_fullscreen(state: bool) -> void:
+	game_is_fullscreen = state
+	
 	if state:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		ProjectSettings.set_setting("display/window/size/borderless", false)
+
+
+func _on_toggle_fullscreen(state: bool) -> void:
+	pause_menu.toggle_fullscreen_check_box(state)
