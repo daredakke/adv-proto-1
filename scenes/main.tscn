@@ -55,4 +55,3 @@ unique_name_in_owner = true
 [connection signal="player_stopped" from="Player" to="Camera" method="_on_player_stopped"]
 [connection signal="set_text_speed" from="UI/PauseMenu" to="." method="_on_pause_menu_set_text_speed"]
 [connection signal="toggle_fullscreen" from="UI/PauseMenu" to="." method="_on_pause_menu_toggle_fullscreen"]
-[connection signal="start_game" from="UI/TitleScreen" to="." method="_on_title_screen_start_game"]

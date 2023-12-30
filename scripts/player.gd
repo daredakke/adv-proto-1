@@ -22,7 +22,7 @@ func _ready() -> void:
 	interaction_origin.position.x = INTERACTION_ORIGIN_OFFSET
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if !player_has_control:
 		return
 	
@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 func find_closest_entity() -> Variant:
 	# Find closest NPC in range to select for interaction
-	var closest_entity = null
+	var nearest_entity = null
 	var closest_entity_distance: float
 	
 	for entity in get_tree().get_nodes_in_group("entity"):
@@ -51,11 +51,11 @@ func find_closest_entity() -> Variant:
 		if current_entity_distance > interaction_range:
 			continue
 		
-		if !closest_entity or current_entity_distance < closest_entity_distance:
-			closest_entity = entity
+		if !nearest_entity or current_entity_distance < closest_entity_distance:
+			nearest_entity = entity
 			closest_entity_distance = current_entity_distance
 	
-	return closest_entity
+	return nearest_entity
 
 
 func _physics_process(delta: float) -> void:

@@ -1,14 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnn3mk5iw72bp"]
 
-[ext_resource type="Texture2D" uid="uid://dxyrh1su7rvjc" path="res://assets/backgrounds/marble-poster.jpg" id="1_84iyv"]
+[ext_resource type="Texture2D" uid="uid://deqo1yskavocd" path="res://assets/backgrounds/marble-poster-partial.png" id="1_c4b2a"]
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="2_wp22r"]
 
 [node name="LevelZero" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(580, 406)
-scale = Vector2(2, 2)
-texture = ExtResource("1_84iyv")
+position = Vector2(670, 77)
+scale = Vector2(5, 5)
+texture = ExtResource("1_c4b2a")
 
 [node name="WallGroup" type="Node2D" parent="."]
 

@@ -24,7 +24,7 @@ func _ready() -> void:
 	hide_all()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if self.visible:
 		if Input.is_action_just_pressed("debug_end_dialogue"):
 			end_dialogue()
@@ -33,8 +33,8 @@ func _process(delta: float) -> void:
 			advance_line()
 
 
-func start_dialogue(npc_id: int) -> void:
-	lines = NpcData.lines[npc_id]
+func start_dialogue(id: int) -> void:
+	lines = NpcData.lines[id]
 	
 	show()
 	

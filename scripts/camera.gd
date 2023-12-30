@@ -11,7 +11,7 @@ extends Camera2D
 @export var smoothing: float = 0.5
 @export var position_reset_wait_time: float = 1.5
 
-var last_direction: int = 0
+var last_direction: float = 0
 var stop_action_complete: bool = false
 
 
@@ -22,7 +22,7 @@ func _ready() -> void:
 		self.position = target.position
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var offset_x: float = offset_distance_x * last_direction
 	
 	if target:
