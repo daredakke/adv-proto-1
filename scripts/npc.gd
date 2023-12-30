@@ -45,7 +45,7 @@ func _ready() -> void:
 		for marker in marker_nodes.get_children():
 			markers.append(marker.global_position)
 		
-		direction_to_marker = get_direction_to_next_coord()
+		direction_to_marker = get_direction_to_position(markers[marker_index], is_grounded)
 
 
 func _physics_process(delta: float) -> void:
@@ -66,7 +66,7 @@ func _physics_process(delta: float) -> void:
 		if pause_duration > 0:
 			wait_timer.start()
 		else:
-			direction_to_marker = get_direction_to_next_coord()
+			direction_to_marker = get_direction_to_position(markers[marker_index], is_grounded)
 	
 	velocity.x = direction_to_marker.x * speed
 	
@@ -82,13 +82,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func get_direction_to_next_coord() -> Vector2:
-	if markers.size() == 0 or marker_index >= markers.size():
-		return Vector2.ZERO
-	
+func get_direction_to_position(position: Vector2, grounded: bool) -> Vector2:
 	# Get vector pointing towards target position
-	var direction: Vector2 = markers[marker_index] - self.global_position
-	direction = direction.normalized()
+	var direction: Vector2 = (position - self.global_position).normalized()
 
 	# Grounded NPCs only need to move left and right
 	if is_grounded:
@@ -106,7 +102,7 @@ func make_npc_static() -> void:
 
 
 func _on_wait_timer_timeout() -> void:
-	direction_to_marker = get_direction_to_next_coord()
+	direction_to_marker = get_direction_to_position(markers[marker_index], is_grounded)
 
 
 func is_close_enough(position: Vector2, target: Vector2, grounded: bool) -> bool:
