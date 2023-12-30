@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://56wfyipni0kv"]
 
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="1_cf4xv"]
-[ext_resource type="Texture2D" uid="uid://d1bfcffdswdx4" path="res://assets/clouds-bg.png" id="1_rf64o"]
+[ext_resource type="Texture2D" uid="uid://d1bfcffdswdx4" path="res://assets/backgrounds/clouds-bg.png" id="1_rf64o"]
 [ext_resource type="Texture2D" uid="uid://blwrsn6vw7m6h" path="res://assets/raindrop.png" id="2_8yjvl"]
 [ext_resource type="PackedScene" uid="uid://dqg8vc6yhbkl4" path="res://scenes/npc.tscn" id="3_dbyq5"]
 [ext_resource type="Texture2D" uid="uid://cn7ofmq8ddfca" path="res://assets/entities/npc.png" id="4_go8k0"]

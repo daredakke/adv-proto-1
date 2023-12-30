@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://l5054ihjeoss"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_andn3"]
-[ext_resource type="PackedScene" uid="uid://56wfyipni0kv" path="res://scenes/level_one.tscn" id="1_c3gp2"]
+[ext_resource type="PackedScene" uid="uid://cnn3mk5iw72bp" path="res://scenes/level_zero.tscn" id="2_5bmii"]
 [ext_resource type="PackedScene" uid="uid://bn5oipkd6sy8w" path="res://scenes/player.tscn" id="2_jq5d0"]
 [ext_resource type="PackedScene" uid="uid://6mpye5ee7iy4" path="res://scenes/dialogue_box.tscn" id="4_71n20"]
 [ext_resource type="PackedScene" uid="uid://cfwmi2p8simic" path="res://scenes/camera.tscn" id="4_q2i3t"]
@@ -17,8 +17,7 @@ start_at_title_screen = false
 unique_name_in_owner = true
 process_mode = 1
 
-[node name="LevelOne" parent="Level" instance=ExtResource("1_c3gp2")]
-position = Vector2(-3, 21)
+[node name="LevelZero" parent="Level" instance=ExtResource("2_5bmii")]
 
 [node name="Player" parent="." instance=ExtResource("2_jq5d0")]
 unique_name_in_owner = true
@@ -32,6 +31,7 @@ position = Vector2(884, 507)
 position_smoothing_speed = 6.0
 target = NodePath("../Player")
 offset_distance_x = 250.0
+offset_distance_y = 220.0
 speed_fast = 7.0
 speed_slow = 0.5
 position_reset_wait_time = 3.0
