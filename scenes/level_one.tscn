@@ -1,11 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://56wfyipni0kv"]
+[gd_scene load_steps=12 format=3 uid="uid://56wfyipni0kv"]
 
+[ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="1_3s4u6"]
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="1_cf4xv"]
 [ext_resource type="Texture2D" uid="uid://d1bfcffdswdx4" path="res://assets/backgrounds/clouds-bg.png" id="1_rf64o"]
 [ext_resource type="Texture2D" uid="uid://blwrsn6vw7m6h" path="res://assets/raindrop.png" id="2_8yjvl"]
 [ext_resource type="PackedScene" uid="uid://dqg8vc6yhbkl4" path="res://scenes/npc.tscn" id="3_dbyq5"]
 [ext_resource type="Texture2D" uid="uid://cn7ofmq8ddfca" path="res://assets/entities/npc.png" id="4_go8k0"]
 [ext_resource type="Texture2D" uid="uid://cuavtyo5kuses" path="res://assets/entities/sign.png" id="5_wdf5u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0jct"]
+shader = ExtResource("1_3s4u6")
+shader_parameter/amount = 300
 
 [sub_resource type="Curve" id="Curve_4ryyy"]
 min_value = -1.0
@@ -36,6 +41,7 @@ hue_variation_curve = SubResource("CurveTexture_ano0t")
 [node name="LevelOne" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a0jct")
 position = Vector2(887, 424)
 scale = Vector2(4.89019, 4.93533)
 texture = ExtResource("1_rf64o")

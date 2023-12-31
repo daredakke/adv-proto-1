@@ -1,13 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnn3mk5iw72bp"]
+[gd_scene load_steps=5 format=3 uid="uid://cnn3mk5iw72bp"]
 
 [ext_resource type="Texture2D" uid="uid://deqo1yskavocd" path="res://assets/backgrounds/marble-poster-partial.png" id="1_c4b2a"]
+[ext_resource type="Shader" path="res://shaders/pixelate.gdshader" id="1_qla1j"]
 [ext_resource type="PackedScene" uid="uid://du1m5swcsg57f" path="res://scenes/wall.tscn" id="2_wp22r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hm2g3"]
+shader = ExtResource("1_qla1j")
+shader_parameter/amount = 300
 
 [node name="LevelZero" type="Node2D"]
 
 [node name="BG" type="Sprite2D" parent="."]
-position = Vector2(670, 77)
-scale = Vector2(5, 5)
+material = SubResource("ShaderMaterial_hm2g3")
+position = Vector2(797, -33)
+scale = Vector2(6, 6)
 texture = ExtResource("1_c4b2a")
 
 [node name="WallGroup" type="Node2D" parent="."]
